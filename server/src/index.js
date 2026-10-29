@@ -4,6 +4,8 @@ import express from 'express';
 import cors from "cors";
 import http from "http";
 
+import experiencesRoutes from "./routes/experiences.js";
+
 const app = express();
 
 app.use(cors());
@@ -13,9 +15,11 @@ app.use(cors());
 //     credentials: true
 // }));
 
+const server = http.createServer(app);
+
 app.use(express.json());
 
-const server = http.createServer(app);
+app.use("/api/experiences", experiencesRoutes)
 
 app.get("/", (req, res) => {
     res.send("Server running!");

@@ -1,7 +1,13 @@
+import {Route, Routes} from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import ExperiencePage from "./features/experiences/ExperiencePage.jsx";
+
 export default function App() {
     return (
-        <>
-            <h1 className={`font-exo text-3xl font-thin`}>Welcome to this empty website</h1>
-        </>
+        <Routes>
+            <Route path={"/"} element={<HomePage />} />
+            <Route path={"/experiences"} element={<ExperiencePage />} />
+        </Routes>
     )
 }
