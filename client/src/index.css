@@ -10,4 +10,11 @@
 
 @theme {
     --color-warm-cream: #f5efe8;
+    --color-warm-cream-background: #FAF8F5;
+    --color-subtle-forest-green: #6ca985;
+    --color-transparent-gray: #444341;
+}
+
+@theme {
+    --background-image-authorization: url('assets/imgs/jean-carlo-emer-1XkwCfuXr3w-unsplash.jpg');
 }
