@@ -1,14 +1,15 @@
+import useRegisterForm from "../hooks/useRegisterForm.js"
+
+import RegisterFormFirstPage from "./RegisterFormFirstPage.jsx"
+import RegisterFormSecondPage from "./RegisterFormSecondPage.jsx"
+
 import backgroundImage from "../../../assets/imgs/mockaroon-YqUeLG7fMr4-unsplash.jpg"
 
-const formInputStyling = `flex flex-wrap px-4 py-5 
-    gap-x-6 gap-y-2  border border-stone-300 bg-stone-100/90 
-    font-bold focus-within:outline-none focus-within:ring-1 focus-within:ring-stone-500 
-    w-[65%]
-    rounded-lg z-1`;
-
 export default function RegisterForm({onSwitchMode}) {
+    const registerFormHook = useRegisterForm();
+
     return (
-        <div className={`relative bg-warm-cream flex-1 p-10`}>
+        <div className={`relative bg-warm-cream flex-1 p-10 overflow-hidden font-exo`}>
             <img
                 src={backgroundImage}
                 alt={`Background`}
@@ -19,47 +20,25 @@ export default function RegisterForm({onSwitchMode}) {
 
             <hr className={`h-0.75 border-0 bg-stone-700 w-20 m-auto mb-12 z-1`} />
 
-            <form className={`z-3`}>
-                <fieldset className={`flex flex-col gap-4`}>
-                    <div className={`flex flex-col gap-1 items-center`}>
-                        <div className={formInputStyling}>
-                            <input
-                                type={`text`}
-                                placeholder={'Username'}
-                                autoComplete={"off"}
-                                required={true}
-                                className={"flex-1 focus:outline-none"}
-                            />
-                        </div>
-                    </div>
+            <div className={`relative`}>
+                <div inert={registerFormHook.displaySecondPage} className={`w-full absolute inset-0
+                    transition-transform duration-500 ease-in-out
+                    ${registerFormHook.displaySecondPage
+                    ? "-translate-x-full pointer-events-none"
+                    : "translate-x-0"
+                }`}>
+                    <RegisterFormFirstPage registerFormHook={registerFormHook} />
+                </div>
 
-                    <div className={`flex flex-col gap-1 items-center`}>
-                        <div className={formInputStyling}>
-                            <input
-                                type={`text`}
-                                placeholder={'Password'}
-                                autoComplete={"off"}
-                                required={true}
-                                className={"flex-1 focus:outline-none"}
-                            />
-                        </div>
-                    </div>
-
-                    <button
-                        type={"submit"}
-                        className={`
-                            px-4 py-3
-                            mt-2 rounded-lg 
-                            bg-yellow-950/80
-                            hover:bg-yellow-950/90
-                            text-stone-50 font-medium
-                            w-[65%]
-                            m-auto z-2
-                            `}>
-                        Sign In
-                    </button>
-                </fieldset>
-            </form>
+                <div inert={!registerFormHook.displaySecondPage} className={`w-full absolute inset-0
+                    transition-transform duration-500 ease-in-out
+                    ${registerFormHook.displaySecondPage
+                    ? "translate-x-0"
+                    : "translate-x-full pointer-events-none absolute inset-0"
+                }`}>
+                    <RegisterFormSecondPage registerFormHook={registerFormHook} />
+                </div>
+            </div>
         </div>
     )
 }
